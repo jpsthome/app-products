@@ -1,0 +1,13 @@
+ion-container {
+  position: relative;
+}
+.vertical-center {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.vertical-center > ion-button {
+  margin: 5rem 0;
+}
