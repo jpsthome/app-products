@@ -1,0 +1,63 @@
+
+
+<form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+  
+    <ion-label>{{isEdit ? "Edição" : "Cadastro"}} de Cliente</ion-label>
+
+    <ion-item>
+      <ion-label position="floating">Código do Cliente</ion-label>
+      <ion-input type="number" placeholder="0" min="0" formControlName="clientCode"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">CPF</ion-label>
+      <ion-input inputmode="numeric" placeholder="000.000.000-00" min="0" formControlName="cpf"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">E-mail</ion-label>
+      <ion-input type="email" placeholder="0" min="0" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-radio-group formControlName="sex">
+      <ion-list-header>
+        <ion-label>
+          Sexo
+        </ion-label>
+      </ion-list-header>
+  
+      <ion-item>
+        <ion-label>Masculino</ion-label>
+        <ion-radio value="masculino"></ion-radio>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Feminino</ion-label>
+        <ion-radio value="feminino"></ion-radio>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Outro</ion-label>
+        <ion-radio value="outro"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    
+    <div class="button-group">
+      <ion-button color="light" (click)="cancel()">Cancelar</ion-button>
+      
+      <ng-container *ngIf="isEdit; else isAdd">
+        <ion-button color="primary" type="submit" [disabled]="!clientForm.dirty">Editar</ion-button>
+      </ng-container>
+      <ng-template #isAdd>
+        <ion-button color="primary" type="submit" [disabled]="!clientForm.valid">Salvar</ion-button>
+      </ng-template>
+      
+    </div>
+
+  
+</form>
