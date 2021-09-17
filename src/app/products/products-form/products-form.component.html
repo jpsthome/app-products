@@ -1,3 +1,57 @@
-<p>
-  products-form works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Produtos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+	<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+		
+			<ion-label>Cadastro de Produto</ion-label>
+
+			<ion-item>
+				<ion-label position="floating">Código do Produto</ion-label>
+				<ion-input type="number" placeholder="0" min="0" formControlName="productCode"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="floating">Nome do Produto</ion-label>
+				<ion-input formControlName="name"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="floating">Tamanho do produto</ion-label>
+				<ion-input type="number" placeholder="0" min="0" formControlName="size"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="floating">Valor</ion-label>
+				<ion-input type="number" placeholder="0" min="0" formControlName="value"></ion-input>
+			</ion-item>
+
+			<ion-radio-group formControlName="fabrication">
+				<ion-list-header>
+					<ion-label>
+						Fabricação
+					</ion-label>
+				</ion-list-header>
+		
+				<ion-item>
+					<ion-label>Nacional</ion-label>
+					<ion-radio value="nacional"></ion-radio>
+				</ion-item>
+		
+				<ion-item>
+					<ion-label>Importado</ion-label>
+					<ion-radio value="importado"></ion-radio>
+				</ion-item>
+			</ion-radio-group>
+			
+			<div class="button-group">
+				<ion-button color="light">Cancelar</ion-button>
+				<ion-button color="primary" type="submit" [disabled]="!productForm.valid">Salvar</ion-button>
+			</div>
+
+		
+	</form>
+</ion-content>
