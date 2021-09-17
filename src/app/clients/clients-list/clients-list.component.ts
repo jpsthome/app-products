@@ -2,6 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { Client } from '../models/client.model';
 import { ClientsService } from '../services/clients.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-clients-list',
@@ -16,6 +17,7 @@ export class ClientsListComponent implements OnInit {
   constructor(
     private clientsService: ClientsService,
     private router: Router,
+    private alertController: AlertController,
     route: ActivatedRoute
   ) {
     route.params.subscribe(() => {
@@ -47,5 +49,42 @@ export class ClientsListComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  deleteClient(id: string) {
+    this.clientsService.delete(id).subscribe(
+      (res) => {
+        this.clients = this.clients?.filter((client) => client.id !== id);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  async presentAlertConfirm(id) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar!',
+      message: 'Deseja realmente <strong>deletar</strong> este cliente?!',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          },
+        },
+        {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.deleteClient(id);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }
