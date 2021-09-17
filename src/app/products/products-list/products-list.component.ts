@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ProductsService } from './../services/products.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product.model';
@@ -11,7 +12,10 @@ export class ProductsListComponent implements OnInit {
   products?: Product[];
   expandedId: string = null;
 
-  constructor(private productsService: ProductsService) {}
+  constructor(
+    private productsService: ProductsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getProducts();
@@ -35,5 +39,9 @@ export class ProductsListComponent implements OnInit {
       this.expandedId = null;
     }
     console.log(id);
+  }
+
+  editProduct(id: string) {
+    this.router.navigate(['/tabs/products', id]);
   }
 }

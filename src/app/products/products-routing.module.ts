@@ -15,6 +15,10 @@ const routes: Routes = [
     component: ProductsListComponent,
   },
   {
+    path: ':id',
+    component: ProductsFormComponent,
+  },
+  {
     path: 'new',
     component: ProductsFormComponent,
   },
