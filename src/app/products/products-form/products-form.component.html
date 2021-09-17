@@ -7,7 +7,7 @@
 
 	<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
 		
-			<ion-label>Cadastro de Produto</ion-label>
+			<ion-label>{{isEdit ? "Edição" : "Cadastro"}} de Produto</ion-label>
 
 			<ion-item>
 				<ion-label position="floating">Código do Produto</ion-label>
@@ -48,8 +48,15 @@
 			</ion-radio-group>
 			
 			<div class="button-group">
-				<ion-button color="light">Cancelar</ion-button>
-				<ion-button color="primary" type="submit" [disabled]="!productForm.valid">Salvar</ion-button>
+				<ion-button color="light" (click)="cancel()">Cancelar</ion-button>
+				
+				<ng-container *ngIf="isEdit; else isAdd">
+					<ion-button color="primary" type="submit" [disabled]="!productForm.dirty">Editar</ion-button>
+				</ng-container>
+				<ng-template #isAdd>
+					<ion-button color="primary" type="submit" [disabled]="!productForm.valid">Salvar</ion-button>
+				</ng-template>
+				
 			</div>
 
 		
