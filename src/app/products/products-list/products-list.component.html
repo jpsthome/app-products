@@ -24,7 +24,7 @@
       </ion-item>
       <ion-item-options side="end">
         <ion-item-option color="danger">
-          <ion-icon size="large" name="trash"></ion-icon>
+          <ion-icon size="large" name="trash" (click)="presentAlertConfirm(product.id)"></ion-icon>
         </ion-item-option>
         <ion-item-option>
           <ion-icon size="large" name="create" (click)="editProduct(product.id)"></ion-icon>
