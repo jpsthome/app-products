@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { Client } from '../models/client.model';
 import { ClientsService } from '../services/clients.service';
 
@@ -12,11 +13,17 @@ export class ClientsListComponent implements OnInit {
 
   expandedId: string = null;
 
-  constructor(private clientsService: ClientsService) {}
-
-  ngOnInit() {
-    this.getClients();
+  constructor(
+    private clientsService: ClientsService,
+    private router: Router,
+    route: ActivatedRoute
+  ) {
+    route.params.subscribe(() => {
+      this.getClients();
+    });
   }
+
+  ngOnInit() {}
 
   expand(id: string) {
     if (id !== this.expandedId) {
@@ -25,6 +32,10 @@ export class ClientsListComponent implements OnInit {
       this.expandedId = null;
     }
     console.log(id);
+  }
+
+  editClient(id: string) {
+    this.router.navigate(['/tabs/clients', id]);
   }
 
   getClients() {
